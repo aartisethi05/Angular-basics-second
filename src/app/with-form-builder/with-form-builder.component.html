@@ -1,0 +1,66 @@
+
+<!-- //commented divs not work in model driven forms(reactive forms) only work in template driven forms -->
+
+<form #newUserForm (ngSubmit)="submit()" [formGroup]="myForm">
+
+    <input type="text" placeholder="User name"
+           formControlName="name">
+    <!-- <div *ngIf="!pickedName.valid && pickedName.touched">
+      User name is required!
+    </div> -->
+    <div *ngIf="myForm.controls['name'].hasError('required')">
+      User name is required!
+    </div>
+    <div *ngIf="myForm.controls['name'].hasError('minLength')">
+        minimum 3 characters.
+        </div>  
+    <input type="email" placeholder="Email"
+          formControlName="email">
+    <!-- <div *ngIf="!userEmail.valid && userEmail.touched">
+      Email is required!
+    </div> -->
+    <div *ngIf="myForm.controls.email.hasError('required')">
+      Email is required!
+    </div>
+    
+    <input type="password" placeholder="Password" required
+           formControlName="password">
+    <!-- <div *ngIf="!userPassword.valid && userPassword.touched">
+      Password is required!
+    </div> -->
+<div formGroupName="details">
+    <input type="text" placeholder="Nick name"
+           formControlName="nickname">
+  
+  
+  <select #desig formControlName="desig">
+    <option *ngFor="let d of designation" [value]="d">{{d}}</option>
+  </select>
+  </div>
+    <!-- <button type="submit" [disabled]="!newUserForm.form.valid">
+      Register
+    </button>-->
+  
+    <button type="button" (click)="newUserForm.reset()">
+      Reset
+    </button> 
+
+    <button type="submit" [disabled]="myForm.valid">
+      Register
+    </button>
+  
+    <button type="submit" (click)="setData()">
+        setValue
+      </button>
+    
+      <button type="submit" (click)="patchData()">
+        patchValue
+      </button>
+    
+    <button type="button" (click)="myForm.reset()">
+      Reset
+    </button>
+
+  
+  </form>
+ 
